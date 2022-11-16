@@ -1,0 +1,18 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: python-app-pr-
+spec:
+  pipelineRef:
+    name: build-pipeline
+  resources:
+    - name: git-source
+      resourceRef:
+        name: python-app-git
+  params:
+    - name: imageUrl
+      value: quay.io/mronconi/python-flask-api
+    - name: imageTag
+      value: "1.0"
+  serviceAccountName: pipeline-account
